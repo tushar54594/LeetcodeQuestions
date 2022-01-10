@@ -16,3 +16,6 @@ public:
     return false;
   }
 };
+
+// Staircase Search Algorithm
+// Start with element at i = 0 and j = n-1 and it can go till element at i = m-1 and j = 0 where m= number of rows and n = number of columns
