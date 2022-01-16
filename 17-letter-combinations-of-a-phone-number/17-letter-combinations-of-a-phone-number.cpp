@@ -19,7 +19,7 @@ public:
         vector<string> ans;
         if(digits.length() == 0)
             return ans;
-        string output;
+        string output = "";
         int index;
         string mapping[10] = {"", "", "abc" ,"def" ,"ghi" ,"jkl" ,"mno" ,"pqrs" ,"tuv" ,"wxyz"};
         print(0, digits, output, ans, mapping);
