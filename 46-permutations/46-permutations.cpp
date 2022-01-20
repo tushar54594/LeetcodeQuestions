@@ -7,7 +7,7 @@ public:
             return;
         }
         for(int i = index; i<nums.size(); i++){
-            swap(nums[i], nums[index]);
+            swap(nums[index], nums[i]);
             permutations(index + 1, nums, ans);
             swap(nums[index], nums[i]);
         }
