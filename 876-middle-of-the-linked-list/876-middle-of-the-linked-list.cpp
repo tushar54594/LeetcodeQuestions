@@ -9,24 +9,25 @@
  * };
  */
 class Solution {
-
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* t = head;
-        int count = 0;
-        while(t != NULL){
-            count++;
-            t = t->next;
+        //for empty list or list with only 1 node
+        if(head == NULL || head->next == NULL){
+            return head;
         }
-        
-        int mid = count/2;
-        ListNode* temp = head;
-        count = 0;
-        while(count < mid){
-            temp = temp->next;
-            count++;
+        // for list with 2 nodes
+        else if(head->next->next == NULL){
+            return head->next;
         }
-        return temp;
-        
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(fast != NULL){
+            slow = slow->next;
+            if(fast->next == NULL)
+                fast = fast->next;
+            else
+                fast = fast->next->next;
+        }
+        return slow;
     }
 };
