@@ -10,22 +10,21 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        // in case of empty list or single node
-        if(head == NULL || head->next == NULL){
-            return head;
+    void reverse(ListNode* &head, ListNode* &prev, ListNode* &curr){
+        //base case
+        if(curr == NULL){
+            head = prev;
+            return;
         }
         
-        ListNode* prev = NULL;
-        ListNode* curr = head;
-        ListNode* forward = NULL;
-//         we are using a forward pointer beacuse if we directly make curr->next = prev , then the rest of the linkedList is lost and we cannot access it 
-        while(curr != NULL){
-            forward = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = forward;
-        }
-        return prev;
+        reverse(head,curr,curr->next); //since in the next iteration, prev = curr and curr = curr->next
+        curr->next = prev;
+    }
+public:
+    ListNode* reverseList(ListNode* head) {
+       ListNode* prev = NULL;
+       ListNode* curr = head;
+       reverse(head,prev,curr);
+       return head;
     }
 };
