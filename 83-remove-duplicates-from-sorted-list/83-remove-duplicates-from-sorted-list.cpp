@@ -12,12 +12,12 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         //empty list or list with only 1 node
-        if(head == NULL)
+        if(head == NULL || head->next == NULL)
             return head;
         
         ListNode* curr = head;
-        while(curr != NULL){
-            if((curr->next != NULL) && (curr->val == curr->next->val)){
+        while(curr->next != NULL){
+            if(curr->val == curr->next->val){
                 ListNode* next_next = curr->next->next;
                 ListNode* nodeToDelete = curr->next;
                 delete nodeToDelete;
