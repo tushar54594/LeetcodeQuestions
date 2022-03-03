@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         //empty list or list with only 1 node
-        if(head == NULL || head->next == NULL)
+        if(head == NULL)
             return head;
         
         ListNode* curr = head;
