@@ -51,7 +51,6 @@ class Solution
         
         //row check
         
-        bool rowCheck = false;
         int zeroCount = 0;
         
         for(int i = 0; i<n; i++){
@@ -59,12 +58,11 @@ class Solution
                 zeroCount++;
         }
         
-        if(zeroCount == n)
-            rowCheck = true;
+        if(zeroCount != n)
+            return -1;
             
         //column check
         
-        bool columnCheck = false;
         int oneCount = 0;
         
         for(int i = 0; i<n; i++){
@@ -72,13 +70,10 @@ class Solution
                 oneCount++;
         }
         
-        if(oneCount == n - 1)
-            columnCheck = true;
+        if(oneCount != n - 1)
+            return -1;
             
-        if(rowCheck == true && columnCheck == true)
-            return candidate;
-            
-        return -1;
+        return candidate;
     }
 };
 
