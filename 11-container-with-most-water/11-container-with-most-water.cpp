@@ -4,7 +4,7 @@ public:
         int left = 0;
         int right = height.size()-1;
         int ans = 0;
-        for(int i=0; i<height.size();i++){
+        while(left <= right){
             int area = min(height[left],height[right]) * (right - left);
             
             ans = max(ans,area);
