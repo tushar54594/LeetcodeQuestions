@@ -11,23 +11,27 @@
  */
 class Solution {
 public:
-    bool ans = true;
-    int maxDepth(TreeNode* root) {
+    bool isBalanced(TreeNode* root) {
+        if(height(root) == -1)
+            return false;
+        
+        return true;
+    }
+    
+    int height(TreeNode* root)
+    {
         if(root == NULL)
             return 0;
         
-        int lh = maxDepth(root->left);
-        int rh = maxDepth(root->right);
-        
+        int lh = height(root->left);
+        if(lh == -1)
+            return -1;
+        int rh = height(root->right);
+        if(rh == -1)
+            return-1;
         if(abs(lh - rh) > 1)
-            ans = false;
+            return -1;
         
         return 1 + max(lh,rh);
-    }
-    
-    bool isBalanced(TreeNode* root) {
-        maxDepth(root);
-        
-        return ans;
     }
 };
