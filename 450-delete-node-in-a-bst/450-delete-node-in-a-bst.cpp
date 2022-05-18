@@ -35,7 +35,7 @@ public:
             //if the node has both left and right child
             else if(root->left != NULL && root->right != NULL)
             {
-                //go to the left subtree and find the largest element in the left subtree
+                //go to the left subtree and find the largest element in the left subtree. This is done to maintain the property of BST. We can also go to the right subtree and find the smallest element in the right subtree and then similarly do the next steps
                 TreeNode* temp = find(root->left);
                 //replace the value of the node with this largest element found in the previous step
                 root->val = temp->val;
