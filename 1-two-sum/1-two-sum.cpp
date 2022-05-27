@@ -9,6 +9,7 @@ public:
                 if(target == (n1 + n2)){
                     ans.push_back(i);
                     ans.push_back(j);
+                    break;
                 }
             }
         }
