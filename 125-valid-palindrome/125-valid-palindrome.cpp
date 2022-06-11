@@ -1,22 +1,23 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string str = "";
-        for(int i=0; i<s.size(); i++)
-        {
-            if(isalnum(s[i]))
-                str.push_back(tolower(s[i]));
-        }
-        
         int start = 0;
-        int end = str.size()-1;
+        int end = s.size()-1;
         while(start<end)
         {
-            if(str[start] != str[end])
+            //if the element is not an alphabet then ignore
+            if(!isalnum(s[start]))
+                start++;
+            //if the element is not an alphabet then ignore
+            else if(!isalnum(s[end]))
+                end--;
+            else if(tolower(s[start]) != tolower(s[end]))
                 return false;
-            
-            start++;
-            end--;
+            else
+            {
+                start++;
+                end--;
+            }
         }
         return true;
     }
