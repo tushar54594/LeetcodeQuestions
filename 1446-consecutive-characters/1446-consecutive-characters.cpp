@@ -1,21 +1,17 @@
 class Solution {
 public:
     int maxPower(string s) {
-        int n = s.length();
-        int maxi = 0;
-        for(int i=0; i<n; i++)
+        int ans = 1;
+        int count = 1;
+        for(int i=1; i<s.length(); i++)
         {
-            int count = 1;
-            for(int j=i; j<n; j++)
-            {
-                if(s[j] == s[j+1])
-                    count++;
-                else
-                    break;
-            }
-            maxi = max(maxi, count);
+            if(s[i] == s[i-1])
+                count++;
+            else
+                count = 1;
+            
+            ans = max(ans, count);
         }
-        
-        return maxi;
+        return ans;
     }
 };
