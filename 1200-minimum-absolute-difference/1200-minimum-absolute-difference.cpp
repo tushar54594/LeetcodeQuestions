@@ -8,25 +8,16 @@ public:
         int mini = INT_MAX;
         for(int i=0; i<arr.size()-1; i++)
         {
-            int diff = abs(arr[i+1] - arr[i]);
+            int diff = arr[i+1] - arr[i];
             mini = min(mini, diff);
         }
         
         for(int i=0; i<arr.size()-1; i++)
         {
-            if(abs(arr[i+1] - arr[i]) == mini)
+            if(arr[i+1] - arr[i] == mini)
             {
-                a.push_back(arr[i]);
-                a.push_back(arr[i+1]);
+                ans.push_back({arr[i], arr[i+1]});
             }
-            
-            if(a.size() == 2)
-            {
-                ans.push_back(a);
-                a.pop_back();
-                a.pop_back();
-            }
-
         }
         return ans;
     }
