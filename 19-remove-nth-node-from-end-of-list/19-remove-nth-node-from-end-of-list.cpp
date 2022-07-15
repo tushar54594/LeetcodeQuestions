@@ -18,9 +18,15 @@ public:
         while(n--)
             fast = fast->next;
         
-        //look at the second example test case
+        //look at the second example test case i.e we have to delete the first node
         if(fast == NULL)
-            return head->next;
+        {
+            ListNode* temp = head;
+            head = head->next;
+			temp->next = NULL;
+            delete temp;
+            return head;
+        }
         
         while(fast->next != NULL)
         {
