@@ -19,17 +19,17 @@ public:
         dummy->next = head;
         
         //till the leftmost index
-        ListNode* it = dummy;
-        ListNode* prevIt = NULL;
+        ListNode* prevO = NULL;
+        ListNode* currO = dummy;
         for(int i=0; i<left; i++)
         {
-            prevIt = it;
-            it = it->next;
+            prevO = currO;
+            currO = currO->next;
         }
         
         //reverse logic
-        ListNode* curr = it;
-        ListNode* prev = prevIt;
+        ListNode* prev = prevO;
+        ListNode* curr = currO;
         
         for(int i=left; i<=right; i++)
         {
@@ -40,8 +40,8 @@ public:
         }
         
         //connect
-        prevIt->next = prev;
-        it->next = curr;
+        prevO->next = prev;
+        currO->next = curr;
         
         return dummy->next;
         
