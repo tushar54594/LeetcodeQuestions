@@ -1,26 +1,35 @@
 class Solution {
 public:
-    vector<string> removeAnagrams(vector<string>& words) {
-        vector<string> temp = words;
+    bool isAnagram(string s, string t) {
+        if(s.size() != t.size())
+            return false;
         
-        //sort all the strings in the array
-        for(int i=0; i<temp.size(); i++)
+        vector<int> arr(26,0);
+        for(int i=0; i<s.size(); i++)
         {
-            sort(temp[i].begin(), temp[i].end());
+            arr[s[i]-'a']++;
+            arr[t[i]-'a']--;
         }
         
-        //make an ans array
+        for(int i=0; i<26; i++)
+        {
+            if(arr[i])
+                return false;
+        }
+        
+        return true;
+    }
+    
+    vector<string> removeAnagrams(vector<string>& words) {
         vector<string> ans;
         ans.push_back(words[0]);
         
-        for(int i=1; i<temp.size(); i++)
+        for(int i=1; i<words.size(); i++)
         {
-            if(temp[i] == temp[i-1])
+            if(isAnagram(words[i-1], words[i]))
                 continue;
             else
-            {
                 ans.push_back(words[i]);
-            }
         }
         return ans;
     }
