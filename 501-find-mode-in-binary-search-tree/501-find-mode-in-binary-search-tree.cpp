@@ -11,24 +11,23 @@
  */
 class Solution {
 public:
-    vector<int> arr;
     map<int, int> m;
     
     int max = INT_MIN;
-    void inorder(TreeNode* root, vector<int> &arr)
+    void inorder(TreeNode* root)
     {
         if(root == NULL)
             return;
         
-        inorder(root->left, arr);
+        inorder(root->left);
         m[root->val]++;
         if(m[root->val] > max)
             max = m[root->val];
-        inorder(root->right, arr);
+        inorder(root->right);
     }
     
     vector<int> findMode(TreeNode* root) {
-        inorder(root, arr);
+        inorder(root);
         vector<int> ans;
         
         for(auto i : m)
