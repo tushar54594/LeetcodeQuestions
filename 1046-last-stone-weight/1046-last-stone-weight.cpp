@@ -3,7 +3,6 @@ public:
     int lastStoneWeight(vector<int>& stones) {
         priority_queue<int> pq;
         
-        pq.push(0);
         for(int i=0; i<stones.size(); i++)
         {
             pq.push(stones[i]);
@@ -27,6 +26,10 @@ public:
             }
         }
         
-        return pq.top();
+        //now pq can have either 1 element or 0 element
+        if(pq.size() == 0)   //consider the test case [2,2]
+            return 0;
+        else
+            return pq.top();
     }
 };
