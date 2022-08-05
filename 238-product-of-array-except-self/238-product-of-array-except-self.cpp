@@ -2,25 +2,22 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        vector<int> ans(n);
-        vector<int> left_product(n);
-        vector<int> right_product(n);
+        int temp = 1;
+        vector<int> ans;
         
-        left_product[0] = 1;
-        for(int i=1; i<n; i++)
-        {
-            left_product[i] = left_product[i-1]*nums[i-1];
-        }
-        
-        right_product[n-1] = 1;
-        for(int i=n-2; i>=0; i--)
-        {
-            right_product[i] = nums[i+1]*right_product[i+1];
-        }
-        
+        //calculate the left product of each index
         for(int i=0; i<n; i++)
         {
-            ans[i] = left_product[i]*right_product[i];
+            ans.push_back(temp);
+            temp = temp*nums[i];
+        }
+        
+        //iterate from right to left
+        temp = 1;
+        for(int i=n-1; i>=0; i--)
+        {
+            ans[i] = temp*ans[i];
+            temp = temp*nums[i];
         }
         return ans;
     }
