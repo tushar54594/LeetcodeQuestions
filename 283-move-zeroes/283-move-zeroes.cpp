@@ -3,14 +3,20 @@ public:
     void moveZeroes(vector<int>& nums) {
         int n = nums.size();
         
-        int a = 0;
-        for(int i=0; i<n; i++)
-        {
-            if(nums[i] != 0)
-            {
-                swap(nums[i],nums[a]);
-                a++;
-            }
-        }
+        int j = 0;
+	    int count = 0;
+	    for(int i=0; i<n; i++)
+	    {
+	        if(nums[i] == 0)
+	            count++;
+	        else
+	        {
+	            nums[j++] = nums[i];
+	        }
+	    }
+	    while(count--)
+	    {
+	        nums[j++] = 0;
+	    }
     }
 };
