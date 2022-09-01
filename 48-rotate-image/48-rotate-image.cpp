@@ -12,7 +12,16 @@ public:
         //step2: reverse every row
         for(int i=0; i<n; i++)
         {
-            reverse(matrix[i].begin(), matrix[i].end());
+            int s = 0, e = n-1;
+            while(s<=e)
+            {
+                int temp = matrix[i][s];
+                matrix[i][s] = matrix[i][e];
+                matrix[i][e] = temp;
+                
+                s++;
+                e--;
+            }
         }
     }
 };
