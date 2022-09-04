@@ -1,16 +1,18 @@
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
-        vector<vector<int>> ans;
+        vector<vector<int>> ans(numRows);
         for(int i=0; i<numRows; i++)
         {
-            vector<int> arr(i+1, 1);
+            ans[i].resize(i+1);
+            ans[i][0] = ans[i][i] = 1; //first and last value is always 1 in every row
+            
             for(int j=1; j<i; j++)  
             {
-                arr[j] = ans[i-1][j] + ans[i-1][j-1];
+                ans[i][j] = ans[i-1][j-1] + ans[i-1][j];
             }
-            ans.push_back(arr);
         }
+        
         return ans;
     }
 };
