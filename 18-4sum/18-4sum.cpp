@@ -22,7 +22,7 @@ public:
 
                         while(low<high)
                         {
-                            if(long(nums[low] + nums[high]) == sum)
+                            if(nums[low] + nums[high] == sum)
                             {
                                 vector<int> arr;
                                 arr.push_back(nums[i]);
