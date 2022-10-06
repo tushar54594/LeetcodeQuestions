@@ -1,24 +1,26 @@
 class Solution {
 public:
-int solve(int m, int n, vector<vector<int>> &dp)
-    {
-        //base case
-        if(m == 0 && n == 0)
-            return 1; //we have reached destination, thus return 1
-        if(m < 0 || n < 0)
-            return 0; //we have gone out of bound
-        
-        if(dp[m][n] != -1)
-            return dp[m][n];
-    
-        int top = solve(m-1, n, dp);
-        int left = solve(m, n-1, dp);
-        
-        return dp[m][n] = top + left;
-    }
-    
-    int uniquePaths(int m, int n) {
+int uniquePaths(int m, int n) {
         vector<vector<int>> dp(m, vector<int>(n, -1));
-        return solve(m-1, n-1, dp);
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                if(i == 0 && j == 0)
+                    dp[0][0] = 1;
+                else
+                {
+                    int top = 0, left = 0;
+                    if(i > 0)
+                        top = dp[i-1][j];
+                    if(j > 0)
+                        left = dp[i][j-1];
+                    dp[i][j] = top + left;
+                }
+            }
+        }
+        
+        return dp[m-1][n-1];
     }
 };
