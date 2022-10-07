@@ -12,9 +12,8 @@ public:
                 if(i == 0 && j == 0 && obstacleGrid[0][0] == 0)
                 {
                     dp[0][0] = 1;
-                    continue;
                 }
-                if(obstacleGrid[i][j] == 1)
+                else if(obstacleGrid[i][j] == 1)
                     dp[i][j] = 0;
                 else
                 {
