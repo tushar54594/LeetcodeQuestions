@@ -3,32 +3,34 @@ public:
     
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
-        vector<vector<int>> dp(n, vector<int>(amount+1, -1));
+        vector<int> prev(amount+1, 0);
          
         //base case
         for(int t=0; t<=amount; t++)
         {
             if(t%coins[0] == 0)
-                dp[0][t] = t/coins[0];
+                prev[t] = t/coins[0];
             else
-                dp[0][t] = 1e9;
+                prev[t] = 1e9;
         }
         
         for(int index=1; index<n; index++)
         {
+            vector<int> curr(amount+1, 0);
             for(int t = 0; t<=amount; t++)
             {
-                int notTake = 0 + dp[index-1][t];
+                int notTake = 0 + prev[t];
                 int take = 1e9;
                 if(coins[index] <= t)
-                    take = 1 + dp[index][t-coins[index]];
+                    take = 1 + curr[t-coins[index]];
                 
-                dp[index][t] = min(notTake, take);
+                curr[t] = min(notTake, take);
             }
+            prev = curr;
         }
-        if(dp[n-1][amount] == 1e9)
+        if(prev[amount] == 1e9)
             return -1;
         
-        return dp[n-1][amount];
+        return prev[amount];
     }
 };
