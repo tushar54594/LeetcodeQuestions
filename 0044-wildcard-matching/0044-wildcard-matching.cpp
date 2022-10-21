@@ -12,16 +12,15 @@ public:
             dp[i][0] = false;
         for(int j=1; j<=m; j++)
         {
-            int flag = true;
+            dp[0][j] = true;
             for(int a=1; a<=j; a++)
             {
                 if(p[a-1] != '*')
                 {
-                    flag = false;
+                    dp[0][j] = false;
                     break;
                 }
             }
-            dp[0][j] = flag;
         }
         
         for(int i=1; i<=n; i++)
