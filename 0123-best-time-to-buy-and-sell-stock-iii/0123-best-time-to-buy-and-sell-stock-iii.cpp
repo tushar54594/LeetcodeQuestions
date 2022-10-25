@@ -29,7 +29,7 @@ public:
     
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<vector<vector<int>>> dp(vector<vector<vector<int>>>(n, vector<vector<int>>(2, vector<int>(3, -1))));
+        vector<vector<vector<int>>> dp(n, vector<vector<int>>(2, vector<int>(3, -1)));
         return solve(0, 1, 2, prices, dp);
     }
 };
