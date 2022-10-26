@@ -9,24 +9,14 @@ public:
         
         for(int index=n-1; index>=0; index--)
         {
-            for(int buy=0; buy<=1; buy++)
-            {
-                int profit = 0;
-                if(buy) 
-                {
-                    int val1 = -prices[index] + dp[index+1][0]; //buy(take)
-                    int val2 = 0 + dp[index+1][1]; //notBuy(notTake)
-                    profit = max(val1, val2);
-                }
-                else //sell so +ve profit
-                {
-                    int v1 = prices[index] + dp[index+2][1]; //sell
-                    int v2 = 0 + dp[index+1][0]; //not sell
-                    profit = max(v1, v2);
-                }
-
-                dp[index][buy] = profit;
-            }
+            int val1 = -prices[index] + dp[index+1][0]; //buy(take)
+            int val2 = 0 + dp[index+1][1]; //notBuy(notTake)
+            dp[index][1]= max(val1, val2);
+                
+                
+            int v1 = prices[index] + dp[index+2][1]; //sell
+            int v2 = 0 + dp[index+1][0]; //not sell
+            dp[index][0] = max(v1, v2);
         }
         return dp[0][1];
     }
