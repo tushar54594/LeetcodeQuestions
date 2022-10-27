@@ -2,21 +2,24 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
-        vector<int> after(n+1, 0), curr(n+1, 0);
         
-        for(int index=n-1; index>=0; index--)
+        vector<int> temp;
+        temp.push_back(nums[0]);
+        int len = 1;
+        for(int i=1; i<n; i++)
         {
-            for(int prev_index=index-1; prev_index>=-1; prev_index--)
+            if(nums[i] > temp.back())
             {
-                int notTake = 0 + after[prev_index+1];  //do second parameter +1 since coordinate shift
-                int take = 0;
-                if(prev_index == -1 || nums[index] > nums[prev_index])
-                    take = 1 + after[index+1];
-
-                curr[prev_index+1] = max(notTake, take);
+                temp.push_back(nums[i]);
+                len++;
             }
-            after = curr;
+            else  //we have to do binary search
+            {
+                int index = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
+                temp[index] = nums[i];
+            }
         }
-        return after[-1+1];
+        
+        return len;
     }
 };
