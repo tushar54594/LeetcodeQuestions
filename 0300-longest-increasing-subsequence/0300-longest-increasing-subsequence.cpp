@@ -2,24 +2,18 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
+        vector<int> dp(n, 1); //initialize the dp array to 1
+        int maxi = 1;
         
-        vector<int> temp;
-        temp.push_back(nums[0]);
-        int len = 1;
-        for(int i=1; i<n; i++)
+        for(int index=1; index<n; index++)
         {
-            if(nums[i] > temp.back())
+            for(int prev=0; prev<index; prev++)
             {
-                temp.push_back(nums[i]);
-                len++;
+                if(nums[prev] < nums[index])
+                    dp[index] = max(1 + dp[prev], dp[index]);
             }
-            else  //we have to do binary search
-            {
-                int index = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
-                temp[index] = nums[i];
-            }
+            maxi = max(maxi, dp[index]);
         }
-        
-        return len;
+        return maxi;
     }
 };
