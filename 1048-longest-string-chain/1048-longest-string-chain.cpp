@@ -32,7 +32,9 @@ public:
     
     int longestStrChain(vector<string>& words) {
         //sort according to length
-        sort(words.begin(), words.end(), comp);  
+        sort(words.begin(), words.end(), [](string &s1, string &s2){
+            return s1.size() < s2.size();
+        });  
         
         int n = words.size();
         vector<int> dp(n, 1); //initialize the dp array to 1
