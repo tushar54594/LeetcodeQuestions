@@ -1,23 +1,5 @@
 class Solution {
 public:
-    int f(int i, int j, vector<int>& cuts, vector<vector<int>> &dp)
-    {
-        //base case
-        if(i > j)
-            return 0;
-        
-        if(dp[i][j] != -1)
-            return dp[i][j];
-        
-        int mini = 1e9;
-        for(int index = i; index<=j; index++)
-        {
-            int cost = cuts[j+1] - cuts[i-1] + f(i, index-1, cuts, dp) + f(index+1, j, cuts, dp);
-            mini = min(mini, cost);
-        }
-        return dp[i][j] = mini;
-    }
-    
     int minCost(int n, vector<int>& cuts) {
         int c = cuts.size();
         
@@ -26,7 +8,23 @@ public:
         
         sort(cuts.begin(), cuts.end()); //sort the array
         
-        vector<vector<int>> dp(c+1, vector<int>(c+1, -1));
-        return f(1, c, cuts, dp);
+        vector<vector<int>> dp(c+2, vector<int>(c+2, 0));
+        //make the entire vector 0 so no need to write base case seperately
+        //for i=c, dp[index][j] can be dp[c+1][j] so thus we need c+2
+        
+        for(int i=c; i>=1; i--)
+        {
+            for(int j=i; j<=c; j++)
+            {
+                int mini = 1e9;
+                for(int index = i; index<=j; index++)
+                {
+                    int cost = cuts[j+1] - cuts[i-1] + dp[i][index-1] + dp[index+1][j];
+                    mini = min(mini, cost);
+                }
+                dp[i][j] = mini;
+            }
+        }
+        return dp[1][c];
     }
 };
