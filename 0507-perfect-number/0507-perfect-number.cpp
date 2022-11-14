@@ -11,6 +11,8 @@ public:
         {
             if(num%i == 0)
                 sum += (i == num/i) ? i : i + num/i;
+            if(sum > num)
+                return false;
         }
         
         return sum == num;
