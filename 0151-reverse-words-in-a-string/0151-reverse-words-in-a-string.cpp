@@ -2,17 +2,21 @@ class Solution {
 public:
     string reverseWords(string s) {
         stack<string> stck;
-        for(int i=0; i<s.length(); i++)
+        
+        for(int i=0; i<s.size(); i++)
         {
-            string word = "";
             if(s[i] == ' ')
                 continue;
-            while(i<s.length() && s[i] != ' ')
+            else
             {
-                word += s[i];
-                i++;
+                string word = "";
+                while(i<s.size() && s[i] != ' ')
+                {
+                    word += s[i];
+                    i++;
+                }
+                stck.push(word);
             }
-            stck.push(word);
         }
         
         string ans = "";
@@ -23,6 +27,7 @@ public:
             if(!stck.empty())
                 ans += " ";
         }
+        
         return ans;
     }
 };
