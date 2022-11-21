@@ -7,7 +7,7 @@ public:
         for(char c: s)
             m[c]++;
         
-        for(auto it: m)
+        for(auto &it: m)
         {
             pq.push({it.second, it.first}); // will be in descending order of freq since max heap
         }
