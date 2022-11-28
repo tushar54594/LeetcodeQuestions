@@ -6,7 +6,7 @@ public:
         int j = 0;
         vector<int> ans;
         
-        deque<int> dq; //max heap
+        deque<int> dq; 
         while(j < n)
         {
             //deque me push karne se pehle usse chota jitna bhi element hai usko pop kardo
