@@ -3,8 +3,12 @@ public:
     vector<int> countBits(int n) {
         vector<int> ans(n+1);
         for(int i=0; i<=n; i++)
-            ans[i] = __builtin_popcount(i);
-        
+        {
+            if(i%2 == 0)
+                ans[i] = ans[i/2];
+            else
+                ans[i] = ans[i-1] + 1;
+        }
         return ans;
     }
 };
