@@ -8,11 +8,11 @@ public:
             return dp[n];
         else
         {
-            for(int i=1; i<n; i++)
+            for(int i=1; i*i<=n; i++)
             {
                 if(n%i == 0)
                 {
-                    if(solve(n-i, dp) == false) //if one player is winning the game, then the other should lose the game
+                    if(solve(n-i, dp) == false) 
                         return dp[n] = true;
                 }
             }
