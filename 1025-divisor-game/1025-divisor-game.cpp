@@ -13,7 +13,7 @@ public:
                 if(n%i == 0)
                 {
                     if(solve(n-i, dp) == false) //if one player is winning the game, then the other should lose the game
-                        return dp[i] = true;
+                        return dp[n] = true;
                 }
             }
             return dp[n] = false;
