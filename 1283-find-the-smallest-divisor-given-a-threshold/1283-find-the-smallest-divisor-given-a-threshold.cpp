@@ -37,3 +37,4 @@ public:
 //min sum that we can get is n(number of elements in the array)
 //max um that we can get is summation of array elements(when we divide by max element)
 
+//Time Complexity: n*log(max_element)
