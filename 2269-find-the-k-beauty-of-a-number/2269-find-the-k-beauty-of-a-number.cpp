@@ -1,29 +1,29 @@
 class Solution {
 public:
     int divisorSubstrings(int num, int k) {
-        string s = to_string(num);  //convert the number to string
+        string s = to_string(num);
+        int n = s.size();
         int i = 0;
         int j = 0;
-        
         int ans = 0;
-        while(j < s.size())
+        while(j < n)
         {
             if(j-i+1 < k)
                 j++;
             else if(j-i+1 == k)
             {
-                // on hiting the window size
-                // extract window string and convert to int
-                // check if it follows the given condition
-                string str = s.substr(i, k); //first parameter-start index, second parameter-length
-                int n = stoi(str);
-                if(n != 0 && num%n == 0)
+                string str = "";
+                for(int k=i; k<=j; k++)
+                    str += s[k];
+                int div = stoi(str);
+                if(div != 0 && num%div == 0)
                     ans++;
                 
                 i++;
                 j++;
             }
         }
+        
         return ans;
     }
 };
