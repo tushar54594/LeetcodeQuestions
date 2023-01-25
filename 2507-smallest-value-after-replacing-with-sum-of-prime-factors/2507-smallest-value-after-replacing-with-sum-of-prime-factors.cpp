@@ -18,7 +18,7 @@ public:
         while(true)
         {
             int sum = sumOfPrimeFactors(n);
-            if(n == sum) break;
+            if(n == sum) break; //this means n is a prime no and we cannot replace further
             else n = sum;
         }
         return n;
