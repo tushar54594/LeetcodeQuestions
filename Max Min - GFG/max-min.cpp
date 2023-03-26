@@ -12,8 +12,31 @@ class Solution
    public:
     int findSum(int A[], int N)
     {
-    	sort(A, A + N);
-    	return A[0] + A[N-1];
+    	if(N == 1)
+    	    return 2*A[0];
+    	
+    	int max = A[0];
+    	int min = A[0];
+    	if(A[1] > A[0])
+    	{
+    	    max = A[1];
+    	    min = A[0];
+    	}
+    	else{
+    	    max = A[0];
+    	    min = A[1];
+    	}
+    	
+    	for(int i=2; i<N; i++)
+    	{
+    	    if(A[i] > max)
+    	        max = A[i];
+    	    if(A[i] < min)
+    	        min = A[i];
+    	}
+    	    
+    	return max + min;
+    	
     }
 
 };
