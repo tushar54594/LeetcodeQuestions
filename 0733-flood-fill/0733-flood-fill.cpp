@@ -17,7 +17,6 @@ public:
         int n = image.size();
         int m = image[0].size();
         
-        
         int initialColor = image[sr][sc];
         dfs(sr, sc, image, n, m, initialColor, color);
         return image;
