@@ -11,6 +11,8 @@ public:
 	{
 	    unordered_map<int, int> m;
 	    m.insert({0, -1});  //{rem, index}
+	    //if we get rem 0 anywhere going forward, so the whole subarray is divisible by k
+	    //so to calculate the length of that subarray we do this
 	    
 	    int ans = 0;
 	    int sum = 0;
