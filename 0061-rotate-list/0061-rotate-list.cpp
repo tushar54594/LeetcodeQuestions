@@ -24,9 +24,13 @@ public:
             n++;
         }
         
+        if(k == n+1)
+            return head;
+        
         temp->next = head;
         
         k = k%(n+1);  //n+1 is length of list
+        
         int jump = n - k; 
         temp = head;
         while(jump--)
