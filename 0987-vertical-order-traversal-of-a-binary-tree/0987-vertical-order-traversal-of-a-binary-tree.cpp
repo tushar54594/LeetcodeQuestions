@@ -11,33 +11,45 @@
  */
 class Solution {
 public:
-    void preorder(TreeNode* root, map<int, vector<pair<int,int>>> &m, int level, int verticalNo)
-    {
-        if(root == NULL) return;
-        
-        m[verticalNo].push_back({level, root->val});
-        preorder(root->left, m, level+1, verticalNo-1);
-        preorder(root->right, m, level+1, verticalNo+1);
-    }
-    
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int, vector<pair<int,int>>> m;
-        preorder(root, m, 0, 0);
-        
         vector<vector<int>> ans;
-        for(auto a : m)
+        if(root == NULL) return ans;
+        
+        queue<pair<TreeNode*, pair<int, int>>> q;
+        //node col row
+        map<int, map<int, multiset<int>>> m;
+        
+        q.push({root, {0, 0}});
+        
+        while(!q.empty())
         {
-            sort(a.second.begin(), a.second.end()); //sort the vertical order of same level nodes
-            vector<int> temp;
-            for(auto pair : a.second)
-                temp.push_back(pair.second);
-            
-            ans.push_back(temp);
+            int s = q.size();
+            for(int i=0; i<s; i++)
+            {
+                auto a = q.front();
+                q.pop();
+                
+                auto node = a.first;
+                int x = a.second.first; //col
+                int y = a.second.second; //row
+                
+                m[x][y].insert(node->val);
+                
+                if(node->left) q.push({node->left, {x-1, y+1}});
+                if(node->right) q.push({node->right, {x+1, y+1}});
+            }
         }
+        
+        for(auto x : m)
+        {
+            vector<int> v;
+            for(auto y : x.second)
+            {
+                for(auto z : y.second) v.push_back(z);
+            }
+            ans.push_back(v);
+        }
+        
         return ans;
     }
 };
-
-/*
-take a map : key => vertical line , value => vector of pair{level, node->value}  
-*/
