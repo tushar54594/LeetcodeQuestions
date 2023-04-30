@@ -12,6 +12,7 @@
 class Solution {
 public:
     //NOTE: We are not passing string str as reference because we want it to be different for each step
+    //no need of str as a reference, considering strings would otherwise just be created a new when we add something to them
     void solve(TreeNode* root, vector<string> &ans, string str)
     {
         if(root == NULL) return;
