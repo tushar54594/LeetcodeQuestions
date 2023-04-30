@@ -11,28 +11,9 @@
  */
 class Solution {
 public:
-    int solve(TreeNode* root, bool &flag)
-    {
-        if(root == NULL)
-            return 0;
-            
-        //leaf node
-        if(root->left == NULL && root->right == NULL)
-            return root->val;
-            
-        int leftSum = solve(root->left, flag);
-        int rightSum = solve(root->right, flag);
-        int sum = leftSum + rightSum;
-        
-        if(root->val != sum)
-            flag = false;
-        
-        return sum + root->val;
-    }
-    
     bool checkTree(TreeNode* root) {
-        bool flag = true;
-        int x = solve(root, flag);
-        return flag;
+        if(root->val == root->left->val + root->right->val) return true;
+        
+        return false;
     }
 };
