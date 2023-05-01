@@ -53,4 +53,6 @@ public:
 3.If its not a perfect tree, we go on left and right subtree and again determine if they are perfect tree.
 4.When we have our left and right heights, we do (1 + left + right)
 5.If we reach null, return 0
+
+For calculating height, we are going extreme left and extreme righ since it is a perfect tree, so in between nodes will be filled
 */
