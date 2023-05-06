@@ -2,9 +2,9 @@ class Solution {
 public:
     bool canFinish(int n, vector<vector<int>>& prerequisites) {
         vector<int> adj[n];
-        for(int i=0; i<prerequisites.size(); i++)
+        for(auto a : prerequisites)
         {
-            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
+            adj[a[1]].push_back(a[0]);
         }
         
         vector<int> indegree(n, 0);
