@@ -6,36 +6,46 @@ using namespace std;
 class Solution
 {
 	public:
-	void dfs(int node, vector<int> &vis, vector<int> adj[], stack<int> &s)
-	{
-	    vis[node] = 1;
-	    for(auto a : adj[node])
-	    {
-	        if(!vis[a]) dfs(a, vis, adj, s);
-	    }
-	    
-	    s.push(node);
-	}
-	
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    vector<int> vis(V, 0);
-	    stack<int> s;
+	    vector<int> indegree(V, 0);
 	    for(int i=0; i<V; i++)
 	    {
-	        if(!vis[i]) dfs(i, vis, adj, s);
+	        for(auto a : adj[i]) indegree[a]++;
 	    }
 	    
-	    vector<int> ans;
-	    while(!s.empty())
+	    queue<int> q;
+	    for(int i=0; i<V; i++)
 	    {
-	        ans.push_back(s.top());
-	        s.pop();
+	        if(indegree[i] == 0) q.push(i);
 	    }
 	    
-	    return ans;
+	    vector<int> topo;
+	    while(!q.empty())
+	    {
+	        int node = q.front();
+	        q.pop();
+	        
+	        topo.push_back(node);
+	        
+	        for(auto a : adj[node])
+	        {
+	            indegree[a]--;
+	            if(indegree[a] == 0) q.push(a);
+	        }
+	    }
+	    
+	    return topo;
 	}
+	
+	/*
+	Using BFS
+	1. Find indegree for all the nodes
+	2. Insert all nodes with indegree 0 into the queue
+	3. Take them out of the queue and reduce the indegree of their adjacent nodes by 1
+	4. If indegree becomes zero again put them in the queue
+	*/
 };
 
 //{ Driver Code Starts.
