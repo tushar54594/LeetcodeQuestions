@@ -1,42 +1,33 @@
 class Solution {
 public:
-    bool helper(int node, vector<int> &color, vector<vector<int>>& graph, int n)
+    bool dfs(int node, vector<int> &color, vector<vector<int>>& graph, int c)
     {
-        queue<int> q;
-        q.push(node);
-        color[node] = 0;
-        while(!q.empty())
+        color[node] = c;
+        
+        for(auto a : graph[node])
         {
-            int node = q.front();
-            q.pop();
-            
-            for(auto a : graph[node])
+            if(color[a] == -1) 
             {
-                //if adjacent node is yet not coloured
-                //we will give the opposite color
-                if(color[a] == -1)
-                {
-                    color[a] = !color[node];
-                    q.push(a);
-                }
-                //is the adjacent node having the same color
-                else if(color[a] == color[node]) return false;
+                if(dfs(a, color, graph, !c) == false) return false;
             }
+            else if(color[a] == c) return false;
         }
+        
         return true;
     }
     
     bool isBipartite(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int> color(n, -1);
-        for(int i=0; i<n; i++)
-        {
-            if(color[i] == -1)
-            {
-                if(helper(i, color, graph, n) == false) return false;
-            }
-        }
-        return true;
+        int V = graph.size();
+        vector<int> color(V, -1);
+	    for(int i=0; i<V; i++)
+	    {
+	        if(color[i] == -1)
+	        {
+	            if(dfs(i, color, graph, 0) == false) return false;
+	        }
+	    }
+	    
+	    return true;
     }
 };
 
