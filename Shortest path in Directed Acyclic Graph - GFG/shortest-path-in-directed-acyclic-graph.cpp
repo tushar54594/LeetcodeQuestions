@@ -73,6 +73,18 @@ class Solution {
     /*
     1. Do a topo sort on the graph and store in the stack
     2. Take nodes out of stack one by one and relax the edges
+    
+    WHY TOPOSORT?
+    We moved sequentially i.e. the nodes which are reachable first, we moved there
+    Thus we minimized the no of steps (N + M)
+    
+    Finding the shortest path to a vertex is easy if you already know the shortest paths to all 
+    the vertices that can precede it. Processing the vertices in topological order ensures that 
+    by the time you get to a vertex, you’ve already processed all the vertices that can precede 
+    it which reduces the computation time significantly. In this approach, we traverse 
+    the nodes sequentially according to their reachability from the source.
+
+    Dijkstra’s algorithm is necessary for graphs that can contain cycles because they can’t be topologically sorted. In other cases, the topological sort would work fine as we start from the first node, and then move on to the others in a directed manner.
     */
 };
 
