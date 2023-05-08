@@ -44,6 +44,8 @@ class Solution {
     /*
     for unweighted graphs the first time when we reach the target node, that should be the
     shortest distance as we are doing bfs 
+    So if a node is not visited, then update the dist of the node by adding +1 to the 
+    previous node And if it is visited, then we already got the shortest distance
     */
 };
 
