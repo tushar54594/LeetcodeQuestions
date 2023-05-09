@@ -10,6 +10,7 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
+        //min heap
         priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
         vector<int> dist(V);
         for(int i=0; i<V; i++) dist[i] = 1e9;
@@ -37,6 +38,12 @@ class Solution
         }
         return dist;
     }
+    
+    /*
+    1. It cannot be used if -ve weight edges are present
+       Because then at every iteration, distance will keep on increasing and pq will never 
+       be empty and we will have an INFINITE LOOP 
+    */
 };
 
 
