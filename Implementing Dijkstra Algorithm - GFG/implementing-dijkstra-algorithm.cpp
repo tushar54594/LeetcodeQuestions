@@ -10,19 +10,18 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        //min heap
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        vector<int> dist(V);
-        for(int i=0; i<V; i++) dist[i] = 1e9;
+        vector<int> dist(V, 1e9);
         
         dist[S] = 0;
-        pq.push({0, S}); //{dist, source}
+        set<pair<int, int>> s;
+        s.insert({0, S});
         
-        while(!pq.empty())
+        while(!s.empty())
         {
-            int distance = pq.top().first;
-            int node = pq.top().second;
-            pq.pop();
+            auto it = *(s.begin());
+            int node = it.second;
+            int distance = it.first;
+            s.erase(it);
             
             for(auto a : adj[node])
             {
@@ -31,8 +30,11 @@ class Solution
                 
                 if(distance + edgeWeight < dist[adjNode])
                 {
+                    //erase if it already existed in set
+                    if(dist[adjNode] != 1e9) s.erase({dist[adjNode], adjNode});
+                    
                     dist[adjNode] = distance + edgeWeight;
-                    pq.push({dist[adjNode], adjNode});
+                    s.insert({dist[adjNode], adjNode});
                 }
             }
         }
@@ -40,9 +42,9 @@ class Solution
     }
     
     /*
-    1. It cannot be used if -ve weight edges are present
-       Because then at every iteration, distance will keep on increasing and pq will never 
-       be empty and we will have an INFINITE LOOP 
+    1. set will erase the already existing path which we do not do in pq
+    But we cannot say that it is better than pq
+    It depends on the graph
     */
 };
 
