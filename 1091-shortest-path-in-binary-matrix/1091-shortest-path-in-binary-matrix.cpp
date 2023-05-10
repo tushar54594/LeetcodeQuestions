@@ -2,10 +2,10 @@ class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         int n = grid.size();
-        if(grid[0][0] == 1) return -1;
+        if(grid[0][0] == 1 || grid[n-1][n-1] == 1) return -1; //edge case
         
-        vector<vector<int>> dist(n, vector<int>(n, 1e9));
-        dist[0][0] = 1;
+        vector<vector<int>> vis(n, vector<int>(n, 0));
+        vis[0][0] = 1;
         
         queue<pair<int, pair<int,int>>> q; //{distance, {row, col}}
         q.push({1, {0, 0}});
@@ -27,13 +27,10 @@ public:
                 {
                     int newr = r + drow;
                     int newc = c + dcol;
-                    if(newr>=0 && newr<n && newc>=0 && newc<n && grid[newr][newc] == 0)
+                    if(newr>=0 && newr<n && newc>=0 && newc<n && grid[newr][newc] == 0 && !vis[newr][newc])
                     {
-                        if(distance + 1 < dist[newr][newc])
-                        {
-                            dist[newr][newc] = distance + 1;
-                            q.push({dist[newr][newc], {newr,newc}});
-                        }
+                        vis[newr][newc] = 1;
+                        q.push({distance+1, {newr,newc}});
                     }
                 }
             }
