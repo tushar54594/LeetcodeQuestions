@@ -41,8 +41,5 @@ public:
 };
 
 /*
-Dijkstra's algo using queue as priority queue is not needed since always there is
-a increase of 1 unit distance only so it will be stored in queue in ascending order only
-
-So Dijkstra's algo using queue which is nothing but BFS only
+Using BFS
 */
