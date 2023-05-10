@@ -39,7 +39,7 @@ class Solution {
             {
                 int newr = r + drow[i];
                 int newc = c + dcol[i];
-                if(newr>=0 && newr<n && newc>=0 && newc<=m && grid[newr][newc] == 1)
+                if(newr>=0 && newr<n && newc>=0 && newc<m && grid[newr][newc] == 1)
                 {
                     if(distance + 1 < dist[newr][newc])
                     {
