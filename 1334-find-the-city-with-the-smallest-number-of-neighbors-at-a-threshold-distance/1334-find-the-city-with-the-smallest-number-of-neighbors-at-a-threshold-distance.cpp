@@ -1,44 +1,67 @@
 class Solution {
 public:
-    int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
-        vector<vector<int>> dist(n, vector<int>(n, 1e9));
-        for(auto a : edges)
-        {
-            dist[a[0]][a[1]] = a[2];
-            dist[a[1]][a[0]] = a[2];
-        }
+    vector<int> dijkstra(int V, vector<pair<int,int>> adj[], int S)
+    {
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        vector<int> dist(V);
+        for(int i=0; i<V; i++) dist[i] = 1e9;
         
-        for(int i=0; i<n; i++) dist[i][i] = 0;
+        dist[S] = 0;
+        pq.push({0, S}); //{dist, source}
         
-        for(int k=0; k<n; k++)
+        while(!pq.empty())
         {
-            for(int i=0; i<n; i++)
+            int distance = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+            
+            for(auto a : adj[node])
             {
-                for(int j=0; j<n; j++)
+                int adjNode = a.first;
+                int edgeWeight = a.second;
+                
+                if(distance + edgeWeight < dist[adjNode])
                 {
-                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                    dist[adjNode] = distance + edgeWeight;
+                    pq.push({dist[adjNode], adjNode});
                 }
             }
+        }
+        return dist;
+    }
+    
+    int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
+        vector<pair<int,int>> adj[n];
+        for(auto a : edges)
+        {
+            adj[a[0]].push_back({a[1], a[2]});
+            adj[a[1]].push_back({a[0], a[2]});
         }
         
         int countCity = n;
         int cityNo = -1;
+        
         for(int i=0; i<n; i++)
         {
-            int count = 0;
-            for(int j=0; j<n; j++)
+            int cnt = 0;
+            vector<int> v = dijkstra(n, adj, i);
+            for(auto a : v)
             {
-                if(dist[i][j] <= distanceThreshold) count++;
+                if(a <= distanceThreshold) cnt++;
             }
             
-            if(count <= countCity)
+            if(cnt <= countCity)
             {
-                countCity = count;
+                countCity = cnt;
                 cityNo = i;
             }
         }
+        
         return cityNo;
     }
 };
 
-//FLOYD WARSHALL ALGORITHM
+/*
+Using Dijkstra's algo
+Compute Dijkstra for every node since Dijkstra is single source shortest path
+*/
