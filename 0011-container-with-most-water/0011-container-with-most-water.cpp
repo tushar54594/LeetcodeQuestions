@@ -5,7 +5,7 @@ public:
         int r = height.size()-1;
         
         int ans = INT_MIN;
-        while(l <= r)
+        while(l < r)
         {
             int area = min(height[l], height[r]) * (r-l);
             ans = max(ans, area);
