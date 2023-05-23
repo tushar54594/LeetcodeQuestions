@@ -49,6 +49,7 @@ public:
         DisjointSet ds(maxRow + maxCol + 1);
         
         unordered_map<int,int> stoneNodes;
+        //same row and same col get combined
         for(auto it : stones)
         {
             int nodeRow = it[0];
@@ -58,6 +59,7 @@ public:
             stoneNodes[nodeCol] = 1;
         }
         
+        // to identify valid parents we do 
         int cnt = 0;
         for(auto it : stoneNodes)
         {
