@@ -9,6 +9,7 @@ public:
             return;
         }
         
+        //give each cookie to each child
         for(int i=0; i<k; i++){
             children[i] += cookies[index];
             solve(index+1, cookies, children, k, ans);
