@@ -1,50 +1,24 @@
 class Solution {
 public:
-    bool isSafe(int row, int col, vector<string> &board, int n){
-        int r = row;
-        int c = col;
-        
-        //We don't need to check for right side since we are filling the queens from left to right
-        
-        //check left upper diagonal
-        while(row>=0 && col>=0){
-            if(board[row][col] == 'Q') return false;
-            row--;
-            col--;
-        }
-        
-        row = r;
-        col = c;
-        //check left row
-        while(col>=0){
-            if(board[row][col] == 'Q') return false;
-            col--;
-        }
-        
-        row = r;
-        col = c;
-        //check left lower diagonal
-        while(row<n && col>=0){
-            if(board[row][col] == 'Q') return false;
-            row++;
-            col--;
-        }
-        
-        return true;
-    }
     
-    
-    void solve(int col, vector<string> &board, vector<vector<string>> &ans, int n){
+    void solve(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftRow, vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n){
         if(col == n){
             ans.push_back(board);
             return;
         }
         
         for(int row = 0; row <n; row++){
-            if(isSafe(row, col, board, n)){
+            if(leftRow[row] == 0 && upperDiagonal[row+col] == 0 && lowerDiagonal[n-1+col-row] == 0){
                 board[row][col] = 'Q';
-                solve(col+1, board, ans, n);
+                leftRow[row] = 1;
+                upperDiagonal[row + col] = 1;
+                lowerDiagonal[n-1 + col - row] = 1;
+                solve(col+1, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
+                
                 board[row][col] = '.';
+                leftRow[row] = 0;
+                upperDiagonal[row + col] = 0;
+                lowerDiagonal[n-1 + col - row] = 0;
             }
         }
     }
@@ -57,7 +31,11 @@ public:
         
         for(int i=0; i<n; i++) board[i] = s;
         
-        solve(0, board, ans, n);
+        vector<int> leftRow(n, 0);
+        vector<int> upperDiagonal(2*n-1, 0);
+        vector<int> lowerDiagonal(2*n-1, 0);
+        
+        solve(0, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
         return ans;
     }
 };
