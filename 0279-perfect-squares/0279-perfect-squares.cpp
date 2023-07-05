@@ -16,6 +16,8 @@ public:
     
     
     int numSquares(int n) {
+        if(ceil(sqrt(n)) == floor(sqrt(n))) return 1; //if n is itself perfect square
+        
         vector<int> dp(n+1, -1);
         return solve(n, dp);
     }
