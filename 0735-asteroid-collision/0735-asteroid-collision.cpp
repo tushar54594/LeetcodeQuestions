@@ -24,7 +24,7 @@ public:
                     else if(top < -a)
                     {
                         st.pop();
-                        if(st.empty())
+                        if(st.empty())  //[10,2,-5] -> dry run this example to understand why we used while loop
                         {
                             st.push(a);
                             break;
